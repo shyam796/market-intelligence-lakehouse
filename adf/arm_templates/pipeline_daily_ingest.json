@@ -1,0 +1,30 @@
+{
+    "name": "pl_daily_ingest",
+    "properties": {
+        "activities": [
+            {
+                "name": "nb_ingest_alpha_vantage",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/ingestion/ingest_alpha_vantage"
+                },
+                "linkedServiceName": {
+                    "referenceName": "ls_databricks",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2026-03-22T17:03:18Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
