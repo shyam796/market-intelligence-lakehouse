@@ -15,7 +15,34 @@
                 },
                 "userProperties": [],
                 "typeProperties": {
-                    "notebookPath": "/ingestion/ingest_alpha_vantage"
+                    "notebookPath": "/Users/giridhar.shyam79@gmail.com/databricks/notebooks/ingestion/ingest_alpha_vantage"
+                },
+                "linkedServiceName": {
+                    "referenceName": "ls_databricks",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "nb_bronze_daily_prices",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "nb_ingest_alpha_vantage",
+                        "dependencyConditions": [
+                            "Completed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/giridhar.shyam79@gmail.com/databricks/notebooks/bronze/bronze_daily_prices.py"
                 },
                 "linkedServiceName": {
                     "referenceName": "ls_databricks",
@@ -24,7 +51,7 @@
             }
         ],
         "annotations": [],
-        "lastPublishTime": "2026-03-22T17:03:18Z"
+        "lastPublishTime": "2026-03-24T22:31:23Z"
     },
     "type": "Microsoft.DataFactory/factories/pipelines"
 }
