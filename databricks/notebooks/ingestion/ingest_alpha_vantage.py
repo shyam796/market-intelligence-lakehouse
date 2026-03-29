@@ -1,12 +1,3 @@
-# configure ADLS access
-storage_account = dbutils.secrets.get(scope="keyvault-scope", key="adls-storage-account-name")
-access_key = dbutils.secrets.get(scope="keyvault-scope", key="adls-access-key")
-
-spark.conf.set(
-    f"fs.azure.account.key.{storage_account}.dfs.core.windows.net",
-    access_key
-)
-
 # Databricks notebook source
 # ingest_alpha_vantage.py
 # pulls daily OHLCV prices from Alpha Vantage, writes raw JSON to ADLS
@@ -36,8 +27,15 @@ spark = SparkSession.builder.getOrCreate()
 # set up the secret scope in databricks pointing to your key vault first
 API_KEY        = dbutils.secrets.get(scope="keyvault-scope", key="alpha-vantage-api-key")
 STORAGE_ACCOUNT = dbutils.secrets.get(scope="keyvault-scope", key="adls-storage-account-name")
+ACCESS_KEY     = dbutils.secrets.get(scope="keyvault-scope", key="adls-access-key")
 CONTAINER      = "lakehouse"
 BASE_URL       = "https://www.alphavantage.co/query"
+
+# configure ADLS access
+spark.conf.set(
+    f"fs.azure.account.key.{STORAGE_ACCOUNT}.dfs.core.windows.net",
+    ACCESS_KEY
+)
 
 # tickers to pull — update this list as needed
 TICKERS = ["AAPL", "MSFT", "GOOGL", "AMZN", "NVDA"]
