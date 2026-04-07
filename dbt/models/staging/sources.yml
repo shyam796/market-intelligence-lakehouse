@@ -1,0 +1,29 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: bronze delta tables written by the databricks bronze notebook
+    database: hive_metastore
+    schema: default
+    tables:
+      - name: daily_prices
+        description: daily OHLCV prices for all tickers, partitioned by ingestion date
+        columns:
+          - name: ticker
+            description: stock ticker symbol
+          - name: price_date
+            description: the trading date for this row
+          - name: open
+            description: opening price
+          - name: high
+            description: daily high price
+          - name: low
+            description: daily low price
+          - name: close
+            description: closing price
+          - name: volume
+            description: number of shares traded
+          - name: ingested_at
+            description: timestamp when this row was written to bronze
+          - name: ingestion_date
+            description: partition column, date the pipeline ran

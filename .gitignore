@@ -1,7 +1,7 @@
 # ── dbt ──────────────────────────────────────────
-dbt/profiles.yml          # Contains Databricks token/host — never commit this
-dbt/target/               # Compiled SQL and run artifacts, auto-generated
-dbt/dbt_packages/         # Installed packages (like node_modules), not source code
+dbt/profiles.yml          # Databricks token/host
+dbt/target/               # Compiled SQL and run artifacts
+dbt/dbt_packages/         # Installed packages
 dbt/logs/                 # dbt run logs
 dbt/.user.yml             # dbt anonymous usage tracking file
 
@@ -9,17 +9,15 @@ dbt/.user.yml             # dbt anonymous usage tracking file
 __pycache__/
 *.py[cod]
 *.pyo
-.env                      # Local env vars (API keys, secrets for local testing)
+.env                      
 venv/
 .venv/
 
 # ── Azure / Databricks ───────────────────────────
-*.tfstate                 # Terraform state if you ever add Terraform
-*.tfstate.backup
-.databricks/              # Databricks CLI config (contains tokens)
+.databricks/              # Databricks CLI config
 
 # ── VS Code ──────────────────────────────────────
-.vscode/                  # Personal editor settings, not project config
+.vscode/                  
 
 # ── OS ───────────────────────────────────────────
 .DS_Store                 # Mac metadata files
