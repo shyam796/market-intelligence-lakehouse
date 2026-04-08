@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_daily_prices
+    description: cleaned and deduplicated daily OHLCV prices from bronze
+    columns:
+      - name: ticker
+        description: stock ticker symbol
+        tests:
+          - not_null
+      - name: price_date
+        description: trading date
+        tests:
+          - not_null
+      - name: close
+        description: closing price
+        tests:
+          - not_null
+      - name: volume
+        description: shares traded
+        tests:
+          - not_null
+
+  - name: stg_tickers
+    description: one row per ticker with date range and trading day count
+    columns:
+      - name: ticker
+        description: stock ticker symbol
+        tests:
+          - not_null
+          - unique
+      - name: first_seen_date
+        description: earliest date in the bronze table for this ticker
+        tests:
+          - not_null
+      - name: last_seen_date
+        description: most recent date in the bronze table for this ticker
+        tests:
+          - not_null

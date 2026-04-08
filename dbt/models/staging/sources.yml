@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: bronze
     description: bronze delta tables written by the databricks bronze notebook
-    database: hive_metastore
+    database: myproject_gt_dbx
     schema: default
     tables:
       - name: daily_prices
