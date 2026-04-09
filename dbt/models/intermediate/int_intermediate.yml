@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: int_daily_returns
+    description: daily return % per ticker based on close price
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: price_date
+        tests:
+          - not_null
+      - name: daily_return_pct
+        description: percentage change in close price from previous trading day
+
+  - name: int_moving_avg_30d
+    description: 30 day rolling average close price per ticker
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: price_date
+        tests:
+          - not_null
+      - name: moving_avg_30d
+        description: average close over the last 30 trading days
+        tests:
+          - not_null
+
+  - name: int_volatility_30d
+    description: 30 day rolling volatility per ticker
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: price_date
+        tests:
+          - not_null
+
+  - name: int_52wk_high_low
+    description: 52 week high and low close price per ticker
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: price_date
+        tests:
+          - not_null
+      - name: high_52wk
+        tests:
+          - not_null
+      - name: low_52wk
+        tests:
+          - not_null

@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: dim_ticker
+    description: one row per ticker with trading date range and day count
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+          - unique
+      - name: first_seen_date
+        tests:
+          - not_null
+      - name: last_seen_date
+        tests:
+          - not_null
+
+  - name: fct_daily_prices
+    description: daily OHLCV enriched with return %, moving avg, volatility, 52wk high/low
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: price_date
+        tests:
+          - not_null
+      - name: close
+        tests:
+          - not_null
+      - name: volume
+        tests:
+          - not_null
