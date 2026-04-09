@@ -1,0 +1,36 @@
+trigger:
+  none  # only runs on PRs, not direct pushes
+
+pr:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  DBT_PROFILES_DIR: $(Build.SourcesDirectory)/dbt
+
+steps:
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.11'
+    displayName: set python version
+
+  - script: |
+      pip install dbt-databricks
+    displayName: install dbt
+
+  - script: |
+      dbt deps --project-dir $(Build.SourcesDirectory)/dbt
+    displayName: install dbt packages
+
+  - script: |
+      dbt test --project-dir $(Build.SourcesDirectory)/dbt
+    displayName: run dbt tests
+    env:
+      DBT_HOST: $(DBT_HOST)
+      DBT_HTTP_PATH: $(DBT_HTTP_PATH)
+      DBT_TOKEN: $(DBT_TOKEN)
