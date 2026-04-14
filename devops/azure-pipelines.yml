@@ -1,5 +1,5 @@
 trigger:
-  none  # only runs on PRs, not direct pushes
+  none
 
 pr:
   branches:
@@ -22,6 +22,20 @@ steps:
   - script: |
       pip install dbt-databricks
     displayName: install dbt
+
+  - script: |
+      echo "market_intelligence:" > $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "  target: dev" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "  outputs:" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "    dev:" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "      type: databricks" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "      catalog: myproject_gt_dbx" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "      schema: silver" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "      host: $(DBT_HOST)" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "      http_path: $(DBT_HTTP_PATH)" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "      token: $(DBT_TOKEN)" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+      echo "      threads: 4" >> $(Build.SourcesDirectory)/dbt/profiles.yml
+    displayName: create profiles.yml
 
   - script: |
       dbt deps --project-dir $(Build.SourcesDirectory)/dbt
