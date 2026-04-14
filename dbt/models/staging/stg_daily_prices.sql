@@ -1,6 +1,6 @@
 -- clean and cast daily price data from bronze
 -- deduplicate on ticker + price_date keeping the latest ingested row
-
+-- test ci pipeline
 with source as (
 
     select * from {{ source('bronze', 'daily_prices') }}
