@@ -32,7 +32,7 @@ dbt Core - gold models
         │  moving avg, volatility, returns
         │
         ▼
-Databricks SQL Warehouse → Power BI
+Databricks SQL Warehouse
 ```
 
 ---
@@ -49,7 +49,6 @@ Databricks SQL Warehouse → Power BI
 | Azure Key Vault | All secrets - nothing hardcoded anywhere |
 | Unity Catalog | Data governance on Databricks |
 | Azure DevOps | CI/CD - dbt test runs on every PR, blocks failing merges |
-| Power BI | Serving layer via Databricks SQL Warehouse |
 
 ---
 
